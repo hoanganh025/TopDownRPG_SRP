@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
     
+    public bool facingLeft = true;
+    
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;
@@ -54,11 +56,14 @@ public class PlayerController : MonoBehaviour
 
         if(mouPos.x < playerScreenLocation.x)
         {
-            sprite.flipX = true;
+            facingLeft = false;
+            transform.rotation = Quaternion.Euler(0, -180, 0);
         }
         else
         {
-            sprite.flipX = false;
+            facingLeft = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
+
 }
