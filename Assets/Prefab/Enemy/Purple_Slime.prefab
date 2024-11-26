@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 6686679740232231232}
   - component: {fileID: 5363420719462415945}
   - component: {fileID: 5661413482564721898}
+  - component: {fileID: 4377137952272818882}
+  - component: {fileID: 7758180292669503691}
   m_Layer: 0
   m_Name: Purple_Slime
   m_TagString: Enemy
@@ -211,3 +213,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
+--- !u!114 &4377137952272818882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992706168160163894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeff935e800dbbe4e928b5ec2b8933f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 7
+  knockBackTime: 0.1
+  isKnockBack: 0
+--- !u!114 &7758180292669503691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992706168160163894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbe14b3007ad2842b8c9e490cadaaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 47940948a5bcafb4fb1723075688c00a, type: 2}
+  timeFlash: 0.1

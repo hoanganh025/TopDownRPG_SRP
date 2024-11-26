@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // singleton
+    private static PlayerController InstancePlayer;
+
     [SerializeField] private float speed;
     
     public bool facingLeft = true;
@@ -12,9 +15,25 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator animator;
     private Vector2 dirMove;
+
+    //private constructor for singleton parttern, only create in this scripts
+    private PlayerController() { }
+
+    //public method get instance player
+    public static PlayerController getInstancePlayer()
+    {
+        if(InstancePlayer == null)
+        {
+            InstancePlayer = new PlayerController();
+        }
+
+        return InstancePlayer;
+    }
     
     void Start()
     {
+        InstancePlayer = this;
+
         rb = GetComponent<Rigidbody2D>();
         sprite = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
