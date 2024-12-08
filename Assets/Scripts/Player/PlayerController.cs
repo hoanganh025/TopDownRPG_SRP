@@ -8,6 +8,12 @@ public class PlayerController : MonoBehaviour
     private static PlayerController InstancePlayer;
 
     [SerializeField] private float speed;
+
+    [Header("Dash")]
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashCooldown;
+    private bool canDash = true;
     
     public bool facingLeft = true;
     
@@ -15,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator animator;
     private Vector2 dirMove;
+    private TrailRenderer trailRenderer;
+    
 
     //private constructor for singleton parttern, only create in this scripts
     private PlayerController() { }
@@ -37,6 +45,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
+        trailRenderer = rb.GetComponent<TrailRenderer>();
+
+        //turn off trailrenderer
+        trailRenderer.emitting = false;
     }
 
     void Update()
@@ -49,6 +61,12 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         FacingWithMouse();
+
+        //Dash when space down
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Dash();
+        }
     }
 
     private void Move()
@@ -83,6 +101,32 @@ public class PlayerController : MonoBehaviour
             facingLeft = true;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+    }
+
+    //dash
+    private void Dash()
+    {
+        if (canDash)
+        {
+            speed += dashForce;
+            //turn on trailRenderer
+            trailRenderer.emitting = true;
+            StartCoroutine(DashRoutine());
+        }
+        
+    }
+
+    public IEnumerator DashRoutine()
+    {
+        canDash = false;
+        //wait time to dash
+        yield return new WaitForSeconds(dashTime);
+        speed -= dashForce;
+        //turn off trailRenderer
+        trailRenderer.emitting = false;
+        //wait time dash cooldown
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
 }

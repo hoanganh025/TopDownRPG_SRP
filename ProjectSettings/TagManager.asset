@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Bush
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Camera
   - Water
   - UI
   - 
@@ -41,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 511713035
+    locked: 0
+  - name: Foreground
+    uniqueID: 502754169
+    locked: 0
+  - name: Player+Enemy
+    uniqueID: 267891917
     locked: 0

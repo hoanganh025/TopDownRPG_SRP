@@ -8,8 +8,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public float currentHealth {  get; private set; }
 
     private Animator animator;
-    private KnockBack knockBackScripts;
-    private Flash flashScrips;
 
     //delegete
     public delegate void OnHit();
@@ -20,8 +18,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         currentHealth = startingHealth;
         animator = GetComponent<Animator>();
-        knockBackScripts = GetComponent<KnockBack>();
-        flashScrips = GetComponent<Flash>();
     }
 
     public void takeDamage(float damage)
@@ -30,17 +26,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
 
         //set knockback
-        if(knockBackScripts != null)
+        if (gameObject.TryGetComponent<KnockBack>(out var knockback))
         {
-            knockBackScripts.GetKnockBack(PlayerController.getInstancePlayer().transform);
+            knockback.GetKnockBack(PlayerController.getInstancePlayer().transform);
         }
 
         //set flash when be hit 
-        if (flashScrips != null)
+        if (gameObject.TryGetComponent<Flash>(out var flash))
         {
-            StartCoroutine(flashScrips.FlashRoutine());
+            StartCoroutine(flash.FlashRoutine());
         }
-
 
         if (currentHealth <= 0)
         {
