@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         //set knockback
         if (gameObject.TryGetComponent<KnockBack>(out var knockback))
         {
-            knockback.GetKnockBack(PlayerController.getInstancePlayer().transform);
+            knockback.GetKnockBack(PlayerController.InstancePlayer.transform);
         }
 
         //set flash when be hit 

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // singleton
-    private static PlayerController InstancePlayer;
-
     [SerializeField] private float speed;
 
     [Header("Dash")]
@@ -22,26 +19,26 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 dirMove;
     private TrailRenderer trailRenderer;
-    
 
-    //private constructor for singleton parttern, only create in this scripts
-    private PlayerController() { }
+    // singleton
+    public static PlayerController InstancePlayer;
 
-    //public method get instance player
-    public static PlayerController getInstancePlayer()
+    private void Awake()
     {
-        if(InstancePlayer == null)
+        //check to avoid duplicate instancePlayer
+        if (InstancePlayer == null)
         {
-            InstancePlayer = new PlayerController();
+            InstancePlayer = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        return InstancePlayer;
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    
+
     void Start()
     {
-        InstancePlayer = this;
-
         rb = GetComponent<Rigidbody2D>();
         sprite = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
