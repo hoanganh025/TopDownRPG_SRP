@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] Animator animatorScene;
     public string sceneTransitionName { get; private set; }
     //singleton
     public static SceneController instanceSceneManager;
@@ -25,12 +26,27 @@ public class SceneController : MonoBehaviour
 
     public void NextScene()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadSceneRoutine());
     }
 
-    public void LoadScene(string _sceneName)
+    public void LoadSceneByName(string _sceneName)
     {
-        SceneManager.LoadSceneAsync(_sceneName);
+        StartCoroutine(LoadSceneRoutine(_sceneName));
     }
 
+    //Overloading LoadSceneRoutine 
+    private IEnumerator LoadSceneRoutine()
+    {
+        animatorScene.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        animatorScene.SetTrigger("Start");
+    }
+    private IEnumerator LoadSceneRoutine(string _sceneName)
+    {
+        animatorScene.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadSceneAsync(_sceneName);
+        animatorScene.SetTrigger("Start");
+    }
 }

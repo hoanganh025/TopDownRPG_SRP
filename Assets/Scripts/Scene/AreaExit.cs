@@ -18,7 +18,7 @@ public class ArenaExit : MonoBehaviour
             }
             else
             {
-                SceneController.instanceSceneManager.LoadScene(sceneName);
+                SceneController.instanceSceneManager.LoadSceneByName(sceneName);
             }
         }
     }
