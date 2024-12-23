@@ -24,7 +24,13 @@ public class Sword : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //stop input while time scale = 0
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
+        else if (Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("Attack");
             //when attack enable collider sword
