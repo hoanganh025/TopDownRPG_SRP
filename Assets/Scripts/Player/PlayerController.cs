@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
         if (InstancePlayer == null)
         {
             InstancePlayer = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

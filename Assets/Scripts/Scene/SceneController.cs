@@ -15,7 +15,6 @@ public class SceneController : MonoBehaviour
         if (instanceSceneManager == null)
         {
             instanceSceneManager = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

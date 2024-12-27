@@ -52,7 +52,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449665036571879632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -228,8 +228,10 @@ MonoBehaviour:
   itemName: 
   itemQuantity: 0
   isFull: 0
+  itemType: 0
   itemQuantityText: {fileID: 8463848469096137022}
   itemImage: {fileID: 4257365562380165907}
+  emptySprite: {fileID: -1151607207, guid: 26f06195e2a137d40a4eb35f052ed176, type: 3}
   selectedShader: {fileID: 3691855189478129105}
   thisItemSelected: 0
   maxNumberOfItem: 2
@@ -374,7 +376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1151607207, guid: 26f06195e2a137d40a4eb35f052ed176, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

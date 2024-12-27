@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] public string itemName;
-    [SerializeField] public int itemQuantity;
-    [SerializeField] public Sprite itemSprite;
-    [TextArea][SerializeField] public string itemDescription;
+    public string itemName;
+    public int itemQuantity;
+    public Sprite itemSprite;
+    [TextArea]public string itemDescription;
+    public ItemType itemType;
     
     private InventoryManager inventoryManager;
 
@@ -22,7 +23,7 @@ public class Item : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //Get the number of left over item after add in to slot item 
-            int leftOverItems = inventoryManager.AddItem(itemName, itemQuantity, itemSprite, itemDescription);
+            int leftOverItems = inventoryManager.AddItem(itemName, itemQuantity, itemSprite, itemDescription, itemType);
             //If can add all item into item slot, destroy gameObjects
             if(leftOverItems <= 0)
             {

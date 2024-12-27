@@ -16,6 +16,16 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        InventoryManager._dgtCloseInventory += HideToolTip;
+    }
+
+    private void OnDisable()
+    {
+        InventoryManager._dgtCloseInventory -= HideToolTip;
+    }
+
     public void ShowToolTip()
     {
         Vector2 mousePos = Input.mousePosition;

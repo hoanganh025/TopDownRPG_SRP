@@ -8,9 +8,10 @@ public class ItemSO : ScriptableObject
 {
     [SerializeField] public string itemName;
     [SerializeField] private Sprite itemSprite;
-    [SerializeField] private bool haveDuration;
+    //[SerializeField] private bool haveDuration;
     [SerializeField] private float Heal, Mana, Ability;
     [TextArea][SerializeField] private string Description;
+    [SerializeField] private ItemType itemType;
 
     public bool UseItem()
     {

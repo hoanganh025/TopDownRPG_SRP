@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: carrot
   itemSprite: {fileID: 1045889612, guid: 6e1a86510a87e214294a989d51ebd3e3, type: 3}
-  haveDuration: 0
   Heal: 2
   Mana: 0
   Ability: 0
   Description: 'Cu ca rot co the hoi mau
 
     +2 hp'
+  itemType: 0

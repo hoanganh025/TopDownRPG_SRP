@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class EquipmentSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    //------ITEM DATA------//
+    //------EQUIPMENT DATA------//
     public string itemName;
     public int itemQuantity;
     private Sprite itemSprite;
@@ -16,24 +16,18 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     public bool isFull;
     public ItemType itemType;
 
-    //------ITEM SLOT------//
-    [SerializeField] private TMP_Text itemQuantityText;
+    //------EQUIPMENT SLOT------//
+    [SerializeField] private EquippedSlot headSlot, cloackSlot, bodySlot, legsSlot, mainHandSlot, offHandSlot, relicSlot, feetSlot;
     [SerializeField] private Image itemImage;
     [SerializeField] private Sprite emptySprite;
     public GameObject selectedShader;
     public bool thisItemSelected;
-    [SerializeField] private int maxNumberOfItem;
 
     //------ITEM DESCRIPTION------//
     [SerializeField] private Tooltip toolTip;
 
 
     private InventoryManager inventoryManager;
-
-    private void Awake()
-    {
-        itemQuantityText.enabled = false;
-    }
 
     private void Start()
     {
@@ -49,50 +43,33 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             return _itemQuantity;
         }
 
-        //Set the itemType
+        //Set the equipmentType
         this.itemType = _itemType;
 
-        //Set the itemName
+        //Set the equipmentName
         this.itemName = _itemName;
-        //Set the item sprite
+        //Set the equipment sprite
         this.itemSprite = _itemSprite;
         itemImage.sprite = itemSprite;
-        //Set the item description
+        //Set the equipment description
         this.itemDescription = _itemDescription;
 
-        //Set the item quantity
-        this.itemQuantity += _itemQuantity;
+        //Set the equipment quantity
+        this.itemQuantity = 1;
 
-        //if this quantity of item is greater than or equal maximum number of items for this slot
-        if(this.itemQuantity >= maxNumberOfItem)
-        {
-            itemQuantityText.text = maxNumberOfItem.ToString();
-            itemQuantityText.enabled = true;
-
-            //this slot already have full item 
-            isFull = true;
-
-            //Return left over item
-            int leftOverItems = _itemQuantity - maxNumberOfItem;
-            itemQuantity = maxNumberOfItem;
-            return leftOverItems;
-        }
-
-        //Set text quantity, if this item slot can contain all item, set quantity and return number of left over item is 0
-        itemQuantityText.text = this.itemQuantity.ToString();
-        itemQuantityText.enabled = true;
+        isFull = true;
         return 0;
     }
 
     //if click on this slot 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             OnLeftClick();
         }
-        
-        else if(eventData.button == PointerEventData.InputButton.Right)
+
+        else if (eventData.button == PointerEventData.InputButton.Right)
         {
             OnRightClick();
         }
@@ -103,18 +80,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         //Using item by selecting item twice
         if (thisItemSelected)
         {
-            //Check if item can be used from InventoryManager, return bool canUse
-            bool canUse = inventoryManager.UseItem(itemName);
-            if(canUse)
-            {
-                isFull = false;
-                itemQuantity -= 1;
-                itemQuantityText.text = itemQuantity.ToString();
-                if (itemQuantity <= 0)
-                {
-                    EmptySlot();
-                }
-            }
+            EquipGear();
         }
 
         else
@@ -124,7 +90,30 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             selectedShader.SetActive(true);
             thisItemSelected = true;
         }
-        
+    }
+
+    //If equip gear, move equipment to EquippedSlot by type
+    private void EquipGear()
+    {
+        if (itemType == ItemType.head)
+            headSlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.cloak)
+            cloackSlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.body)
+            bodySlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.legs)
+            legsSlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.mainHand)
+            mainHandSlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.offHand)
+            offHandSlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.relic)
+            relicSlot.EquipGear(itemSprite, itemName, itemDescription);
+        if (itemType == ItemType.feet)
+            feetSlot.EquipGear(itemSprite, itemName, itemDescription);
+
+        //After that, reset data of this equipment slot
+        EmptySlot();
     }
 
     private void OnRightClick()
@@ -148,7 +137,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         Collider2D collider = itemToDrop.AddComponent<BoxCollider2D>();
         collider.isTrigger = true;
 
-        //Create and modify Rigidbody@d
+        //Create and modify Rigidbody2d
         Rigidbody2D rigidbody2D = itemToDrop.AddComponent<Rigidbody2D>();
         rigidbody2D.gravityScale = 0;
 
@@ -159,7 +148,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         //Minus quantity item drop
         itemQuantity -= 1;
         isFull = false;
-        itemQuantityText.text = itemQuantity.ToString();
         if (itemQuantity <= 0)
         {
             EmptySlot();
@@ -184,9 +172,10 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     private void EmptySlot()
     {
         isFull = false;
-        itemQuantityText.enabled = false;
         itemName = "";
+        itemQuantity = 0;
         itemDescription = "";
+        itemType = ItemType.none;
         itemImage.sprite = emptySprite;
     }
 }
