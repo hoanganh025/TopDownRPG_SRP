@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHeal : MonoBehaviour, IDamageable
 {
+    //Heal UI
+    public Slider slider;
+
     [SerializeField] public float startingHealth;
     public float currentHealth { get; private set; }
 
     private void Start()
     {
         currentHealth = startingHealth;
-        Debug.Log(currentHealth);
+        UpdateHealthBar();
     }
 
     private void Update()
@@ -18,7 +22,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.P))
         {
             takeDamage(1);
-            Debug.Log(currentHealth);
+            UpdateHealthBar();
         }
     }
 
@@ -39,18 +43,27 @@ public class PlayerHeal : MonoBehaviour, IDamageable
             StartCoroutine(flash.FlashRoutine());
         }
 
+        //Update health bar
+        UpdateHealthBar();
+
         if (currentHealth <= 0)
         {
             //animation death
             Debug.Log("Dath");
         }
+
+        
     }
 
     public void Healing(float _healValue)
     {
         currentHealth = Mathf.Clamp(currentHealth + _healValue, 0, startingHealth);
-        Debug.Log(currentHealth);
+        //Update health bar
+        UpdateHealthBar();
     }
 
-
+    private void UpdateHealthBar()
+    {
+        slider.value = currentHealth / startingHealth;
+    }
 }

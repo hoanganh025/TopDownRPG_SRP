@@ -9,6 +9,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private Animator animator;
 
+    //Enemy Health bar
+    private EnemyHealthBar healthBar;
+
     //delegete
     public delegate void OnHit();
     //delegete instance
@@ -18,6 +21,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         currentHealth = startingHealth;
         animator = GetComponent<Animator>();
+        healthBar = GetComponent<EnemyHealthBar>();
     }
 
     public void takeDamage(float damage)
@@ -37,13 +41,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             StartCoroutine(flash.FlashRoutine());
         }
 
+        healthBar.UpdateEnemyHealthBar(startingHealth, currentHealth);
+
         if (currentHealth <= 0)
         {
             //animation death
             animator.SetTrigger("Death");
-            
-            //turn off behaviour 
 
+            //turn off behaviour 
+            
         }
     }
 

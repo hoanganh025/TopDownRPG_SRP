@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d134af7f4fccf4999d4cc5d1d96602, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Sword
   health: 0
-  attack: 0
+  attack: 5
   defense: 0
-  agility: 0
+  agility: 1
   mana: 0
   AP: 0
