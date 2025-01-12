@@ -11,6 +11,16 @@ public class PlayerHeal : MonoBehaviour, IDamageable
     [SerializeField] public float startingHealth;
     public float currentHealth { get; private set; }
 
+    private void OnEnable()
+    {
+        GameEventManager.instance.levelEvent.onLevelUp += Fill;
+    }
+
+    private void OnDisable()
+    {
+        GameEventManager.instance.levelEvent.onLevelUp -= Fill;
+    }
+
     private void Start()
     {
         currentHealth = startingHealth;
@@ -34,7 +44,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
         //set knockback
         if (gameObject.TryGetComponent<KnockBack>(out var knockback))
         {
-            knockback.GetKnockBack(PlayerController.InstancePlayer.transform);
+            knockback.GetKnockBack(PlayerController.instance.transform);
         }
 
         //set flash when be hit 
@@ -49,10 +59,8 @@ public class PlayerHeal : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             //animation death
-            Debug.Log("Dath");
+            Debug.Log("Death");
         }
-
-        
     }
 
     public void Healing(float _healValue)
@@ -65,5 +73,10 @@ public class PlayerHeal : MonoBehaviour, IDamageable
     private void UpdateHealthBar()
     {
         slider.value = currentHealth / startingHealth;
+    }
+
+    public void Fill()
+    {
+        currentHealth = startingHealth;
     }
 }

@@ -8,8 +8,8 @@ public class Entrance : MonoBehaviour
     {
         /*if (transitionName == SceneController.getinstanceSceneManagement().sceneTransitionName)
         {
-            PlayerController.InstancePlayer.transform.position = this.transform.position;
+            PlayerController.instance.transform.position = this.transform.position;
         }*/
-        PlayerController.InstancePlayer.transform.position = this.transform.position;
+        PlayerController.instance.transform.position = this.transform.position;
     }
 }

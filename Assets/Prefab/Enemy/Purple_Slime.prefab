@@ -510,7 +510,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!58 &678481287835552546
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -631,6 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa0f32e81c60604fbb54eb04ea574a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exp: 50
   startingHealth: 5
 --- !u!114 &4377137952272818882
 MonoBehaviour:

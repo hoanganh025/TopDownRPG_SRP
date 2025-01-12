@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Move")]
     [SerializeField] private float speed;
 
     [Header("Dash")]
@@ -11,9 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
     private bool canDash = true;
+
+    [Header("Experience")]
+    public float currentExp;
+    public float maxExp;
     
     public bool facingLeft = true;
-    
+
+    private InputController inputController;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;
@@ -21,28 +27,45 @@ public class PlayerController : MonoBehaviour
     private TrailRenderer trailRenderer;
 
     // singleton
-    public static PlayerController InstancePlayer;
+    public static PlayerController instance;
 
     private void Awake()
     {
-        //check to avoid duplicate instancePlayer
-        if (InstancePlayer == null)
+        //check to avoid duplicate instance
+        if (instance == null)
         {
-            InstancePlayer = this;
+            instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
+        inputController = new InputController();
         rb = GetComponent<Rigidbody2D>();
         sprite = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
         trailRenderer = rb.GetComponent<TrailRenderer>();
+    }
 
+    private void OnEnable()
+    {
+        if(inputController != null)
+        {
+            inputController.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if(inputController != null)
+        {
+            inputController.Disable();
+        }
+    }
+
+    void Start()
+    {
         //turn off trailrenderer
         trailRenderer.emitting = false;
     }
@@ -50,7 +73,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //get direction and vecto
-        dirMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        //dirMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        dirMove = inputController.Gameplay.Movement.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
@@ -59,7 +83,8 @@ public class PlayerController : MonoBehaviour
         FacingWithMouse();
 
         //Dash when space down
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        if (inputController.Gameplay.Dash.triggered)
         {
             Dash();
         }
@@ -124,5 +149,4 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
-
 }

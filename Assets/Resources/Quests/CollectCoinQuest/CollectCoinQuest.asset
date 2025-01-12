@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f1ae9dca515e842b1699c870fe89a4, type: 3}
+  m_Name: CollectCoinQuest
+  m_EditorClassIdentifier: 
+  <id>k__BackingField: CollectCoinQuest
+  displayName: Collect the coin!
+  levelRequiment: 1
+  questPrerequisites: []
+  questStepPrefabs:
+  - {fileID: 4670728387624299013, guid: 38c1fd8482e7f704fa2d28751078b24a, type: 3}
+  goldReward: 50
+  expReward: 230

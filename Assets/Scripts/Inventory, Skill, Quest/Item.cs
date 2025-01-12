@@ -22,6 +22,9 @@ public class Item : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            //Call event
+            GameEventManager.instance.miscEvent.ItemCollected();
+
             //Get the number of left over item after add in to slot item 
             int leftOverItems = inventoryManager.AddItem(itemName, itemQuantity, itemSprite, itemDescription, itemType);
             //If can add all item into item slot, destroy gameObjects

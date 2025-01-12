@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
+    [Header("Exp")]
+    [SerializeField] private int exp;
+
     [SerializeField] private float startingHealth;
     public float currentHealth {  get; private set; }
 
@@ -32,7 +35,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         //set knockback
         if (gameObject.TryGetComponent<KnockBack>(out var knockback))
         {
-            knockback.GetKnockBack(PlayerController.InstancePlayer.transform);
+            knockback.GetKnockBack(PlayerController.instance.transform);
         }
 
         //set flash when be hit 
@@ -47,6 +50,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             //animation death
             animator.SetTrigger("Death");
+
+            //Player receives exp
+            GameEventManager.instance.levelEvent.ExpGained(exp);
 
             //turn off behaviour 
             
