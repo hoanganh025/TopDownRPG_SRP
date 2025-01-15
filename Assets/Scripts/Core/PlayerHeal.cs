@@ -8,7 +8,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
     //Heal UI
     public Slider slider;
 
-    [SerializeField] public float startingHealth;
+    [SerializeField] public float maxHealth;
     public float currentHealth { get; private set; }
 
     private void OnEnable()
@@ -23,7 +23,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
         UpdateHealthBar();
     }
 
@@ -39,7 +39,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
     public void takeDamage(float damage)
     {
         //set health always between 0 and starting health 0<currentHealth<startingHealth
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
 
         //set knockback
         if (gameObject.TryGetComponent<KnockBack>(out var knockback))
@@ -56,6 +56,12 @@ public class PlayerHeal : MonoBehaviour, IDamageable
         //Update health bar
         UpdateHealthBar();
 
+        //When player death
+        Death(currentHealth);
+    }
+
+    public void Death(float currentHealth)
+    {
         if (currentHealth <= 0)
         {
             //animation death
@@ -65,18 +71,19 @@ public class PlayerHeal : MonoBehaviour, IDamageable
 
     public void Healing(float _healValue)
     {
-        currentHealth = Mathf.Clamp(currentHealth + _healValue, 0, startingHealth);
+        currentHealth = Mathf.Clamp(currentHealth + _healValue, 0, maxHealth);
         //Update health bar
         UpdateHealthBar();
     }
 
     private void UpdateHealthBar()
     {
-        slider.value = currentHealth / startingHealth;
+        slider.value = currentHealth / maxHealth;
     }
 
     public void Fill()
     {
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
+        UpdateHealthBar();
     }
 }

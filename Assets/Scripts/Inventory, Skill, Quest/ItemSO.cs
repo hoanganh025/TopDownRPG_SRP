@@ -19,7 +19,7 @@ public class ItemSO : ScriptableObject
         {
             PlayerHeal playerHeal = GameObject.Find("PlayerHeal").GetComponent<PlayerHeal>();
             //If player heal is full, item heal can't be used
-            if (playerHeal.currentHealth == playerHeal.startingHealth)
+            if (playerHeal.currentHealth == playerHeal.maxHealth)
             {
                 return false;
             }

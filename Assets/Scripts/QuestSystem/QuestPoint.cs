@@ -75,7 +75,6 @@ public class QuestPoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNear = true;
-            Debug.Log("Player da di chuyen vao vung nhan/tra nhiem vu");
         }
     }
 

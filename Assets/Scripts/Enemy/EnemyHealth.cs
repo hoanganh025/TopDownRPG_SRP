@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
-    [Header("Exp")]
+    [Header("Config")]
     [SerializeField] private int exp;
-
-    [SerializeField] private float startingHealth;
+    [SerializeField] private float maxHealth;
     public float currentHealth {  get; private set; }
 
     private Animator animator;
@@ -20,9 +20,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     //delegete instance
     public static event OnHit onHit;
 
+
     void Start()
     {
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         healthBar = GetComponent<EnemyHealthBar>();
     }
@@ -30,7 +31,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public void takeDamage(float damage)
     {
         //set health always between 0 and starting health 0<currentHealth<startingHealth
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
 
         //set knockback
         if (gameObject.TryGetComponent<KnockBack>(out var knockback))
@@ -44,8 +45,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             StartCoroutine(flash.FlashRoutine());
         }
 
-        healthBar.UpdateEnemyHealthBar(startingHealth, currentHealth);
+        healthBar.UpdateEnemyHealthBar(maxHealth, currentHealth);
 
+        //When enemy death
+        Death(currentHealth);
+    }
+
+    public void Death(float currentHeath)
+    {
         if (currentHealth <= 0)
         {
             //animation death
@@ -55,7 +62,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             GameEventManager.instance.levelEvent.ExpGained(exp);
 
             //turn off behaviour 
-            
+
         }
     }
 

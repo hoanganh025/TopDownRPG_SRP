@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine(RoamingRoutine());
+        StartCoroutine(RoamingRoutine());
     }
 
     private IEnumerator RoamingRoutine()

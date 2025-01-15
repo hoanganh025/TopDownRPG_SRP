@@ -60,7 +60,7 @@ public class Quest
         GameObject questStepPrefab = GetCurrentQuestStepPrefab();
         if (questStepPrefab != null)
         {
-            //If not exsist quest step prefab
+            //If exsist quest step prefab
             //Instantiate prefab questStep
              QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab, currentTranform)
                 .GetComponent<QuestStep>();
@@ -86,7 +86,7 @@ public class Quest
         return questStepPrefab;
     }
 
-    public void StoreQuestStepState(QuestStepState questStepState, int stepIndex)
+    public void StoreQuestStepState(QuestStepState questStepState, int stepIndex) //(e.g 1, 0)
     {
         //Check quest index is within the range 
         if(stepIndex < questStepStates.Length) //(e.g 0<1)

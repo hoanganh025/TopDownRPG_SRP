@@ -9,6 +9,7 @@ public abstract class QuestStep : MonoBehaviour
     private string questId;
     private int stepIndex;
 
+    //Get info quest step from quest
     public void InitializeQuestStep(string questId, int stepIndex, string questStepState)
     {
         this.questId = questId;

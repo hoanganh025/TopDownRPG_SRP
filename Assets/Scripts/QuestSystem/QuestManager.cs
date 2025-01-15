@@ -42,7 +42,7 @@ public class QuestManager : MonoBehaviour
             {
                 quest.InstantiateCurrentQuestStep(this.transform);
             }
-            //Broadcast the initial state of all quest on startup 
+            //Update questpoint and questicon for all quest
             GameEventManager.instance.questEvent.QuestChangeState(quest);
         }
     }
@@ -140,7 +140,7 @@ public class QuestManager : MonoBehaviour
     {
         Quest quest = GetQuestByID(id);
 
-        quest.StoreQuestStepState(questStepState, stepIndex);
+        quest.StoreQuestStepState(questStepState, stepIndex); //(e.g 2, 0)
         ChangeQuestState(id, quest.questState);
     }
 
