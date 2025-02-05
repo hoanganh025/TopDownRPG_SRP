@@ -72,9 +72,13 @@ public class Sword : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //if game object can be damaged, active this
-        if(collision.TryGetComponent<IDamageable>(out var damageable))
+        if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.takeDamage(damage);
+        }
+        else
+        {
+            return;
         }
     }
 }

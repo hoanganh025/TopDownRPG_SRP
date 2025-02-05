@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAttackState : EnemyState
 {
     private Transform playerTransform;
+    private PlayerHeal playerHeal;
     private float timer = 2f;
     private float timeBetweenAttack = 2f;
 
@@ -50,8 +51,6 @@ public class EnemyAttackState : EnemyState
         {
             enemy.enemyStateMachine.ChangeState(enemy.enemyChaseState);
         }
-
-        
     }
 
     public override void PhysicUpdate()

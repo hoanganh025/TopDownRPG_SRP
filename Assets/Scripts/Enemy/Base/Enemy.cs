@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public float maxHealth;
     public float currentHealth { get; private set; }
     public int exp;
+    public float damage;
 
     [Header("Patrol state variable")]
     public float randomMovementRange = 5f;
@@ -24,8 +26,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public bool isFacingRight = true;
     public bool isDeath = false;
 
+    public PlayerHeal playerHeal;
+    public GameObject player;
+
     public Animator animator;
-    private EnemyHealthBar healthBar;
+    public EnemyHealthBar healthBar;
+    private Flash flash;
 
     public EnemyStateMachine enemyStateMachine;
     public EnemyPatrolState enemyPatrolState;
@@ -34,32 +40,30 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     protected virtual void Awake()
     {
-        enemyStateMachine = new EnemyStateMachine(); 
+        enemyStateMachine = new EnemyStateMachine();
 
+        //Initialize state at child class inheritant from this class
         enemyPatrolState = new EnemyPatrolState(this, enemyStateMachine);
         enemyChaseState = new EnemyChaseState(this, enemyStateMachine);
         enemyAttackState = new EnemyAttackState(this, enemyStateMachine);
+
+        playerHeal = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerHeal>();
+        player = GameObject.FindWithTag("Player");
+        flash = GameObject.Find("Boss").GetComponent<Flash>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         healthBar = GetComponent<EnemyHealthBar>();
 
         currentHealth = maxHealth;
-
-        enemyStateMachine.Initialize(enemyPatrolState);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         enemyStateMachine.currentEnemyState.FrameUpdate();
-    }
-
-    private void FixedUpdate()
-    {
-        enemyStateMachine.currentEnemyState.PhysicUpdate();
     }
 
     #region Heal/Die Function
@@ -80,15 +84,18 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
             StartCoroutine(flash.FlashRoutine());
         }
 
-        healthBar.UpdateEnemyHealthBar(maxHealth, currentHealth);
+        if(healthBar != null)
+        {
+            healthBar.UpdateEnemyHealthBar(maxHealth, currentHealth);
+        }
 
         //When enemy death
         Death(currentHealth);
     }
 
-    public void Death(float currentHeath)
+    public virtual void Death(float currentHeath)
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDeath)
         {
             //Animation death
             animator.SetTrigger("Death");
@@ -98,7 +105,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
             GameEventManager.instance.levelEvent.ExpGained(exp);
 
             //turn off behaviour 
-
+            rigidBody2D.isKinematic = true;
+            slider.gameObject.SetActive(false);
+            //flash.gameObject.SetActive(false);
+            slider.enabled = false;
+            this.enabled = false;
         }
     }
 
@@ -159,4 +170,22 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         isAttackTrigger = attackStatus;
     }
     #endregion
+
+    //Deal damage to player, attach to animation attack 
+    public void DamageToPlayer(float _damage, PlayerHeal playerHeal)
+    {
+        playerHeal.takeDamage(_damage);
+    }
+
+    public void DamageToPlayer(PlayerHeal playerHeal)
+    {
+        playerHeal.takeDamage(damage);
+    }
+
+    public void Healing(float healAmount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + healAmount, 0, maxHealth);
+        Debug.Log(currentHealth);
+        healthBar.UpdateEnemyHealthBar(maxHealth, currentHealth);
+    }
 }

@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackDistanceCheck : MonoBehaviour
+public class BossDashTrigger : MonoBehaviour
 {
-    private Enemy enemy;
+    private BossGolem bossGolem;
 
     private void Awake()
     {
-        enemy = GetComponentInParent<Enemy>();
+        bossGolem = GetComponentInParent<BossGolem>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            enemy.isAttackTrigger = true;
+            bossGolem.isDashTrigger = true;
         }
     }
 
@@ -23,7 +23,7 @@ public class EnemyAttackDistanceCheck : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            enemy.isAttackTrigger = false;
+            bossGolem.isDashTrigger = false;
         }
     }
 }
