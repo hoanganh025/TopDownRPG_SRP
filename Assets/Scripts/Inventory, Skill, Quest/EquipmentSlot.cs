@@ -80,7 +80,12 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         //Using item by selecting item twice
         if (thisItemSelected)
         {
+            if(itemType == ItemType.none)
+            {
+                Debug.LogError("Not set the type of item");
+            }
             EquipGear();
+            
         }
 
         else

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Time.timeScale = 0;
+            
             InventoryMenu.SetActive(true);
             menuActivated = true;
         }

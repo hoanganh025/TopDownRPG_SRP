@@ -37,6 +37,7 @@ public class BossGolem : Enemy
         bossLaserBeamState = new BossLaserBeamState(this, enemyStateMachine);
         bossFireHomingMissleState = new BossFireHomingMissle(this, enemyStateMachine);
 
+        flash = GameObject.Find("Boss").GetComponent<Flash>();
     }
     protected override void Start()
     {

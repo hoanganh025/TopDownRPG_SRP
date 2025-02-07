@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text levelText;
-    [SerializeField] private int targetExp;
-    [SerializeField] private int increaseNextLvExp;
+    [SerializeField] private float targetExp;
+    [SerializeField] private float expGrowthMultipler = 1.2f;
 
     public int currentLevel;
-    public int currentExp;
+    public float currentExp;
 
     [SerializeField] private Slider expBar;
 
@@ -45,7 +45,15 @@ public class LevelManager : MonoBehaviour
             GameEventManager.instance.levelEvent.LevelUp();
             currentLevel++;
             currentExp -= targetExp;
-            targetExp += increaseNextLvExp;
+            targetExp += targetExp * expGrowthMultipler;
+            Debug.Log(targetExp);
+
+            //Stat growth when level up
+            PlayerStat.instance.health += 2;
+            PlayerStat.instance.attack += 1;
+            
+            //After growth, update stat ui
+            PlayerStat.instance.UpdatePlayerStat();
         }
     }
 

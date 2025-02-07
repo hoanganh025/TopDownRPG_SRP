@@ -5,8 +5,22 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
-    public int health, attack, defense, agility, mana, AP;
+    public float health, attack, defense, agility, mana, AP;
     [SerializeField] private TMP_Text healthText, attackText, defenseText, agilityText, manaText, APText;
+
+    public static PlayerStat instance;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {

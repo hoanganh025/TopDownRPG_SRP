@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Move")]
-    [SerializeField] private float speed;
 
     [Header("Dash")]
     [SerializeField] private float dashForce;
@@ -74,13 +73,17 @@ public class PlayerController : MonoBehaviour
     {
         //get direction and vecto
         //dirMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        dirMove = inputController.Gameplay.Movement.ReadValue<Vector2>();
+        GetDirectionPlayerMove();
+
+        AttackWithMouseDirection();
+
+        
     }
 
     private void FixedUpdate()
     {
         Move();
-        FacingWithMouse();
+        //FacingWithMouse();
 
         //Dash when space down
         //if (Input.GetKeyDown(KeyCode.Space))
@@ -88,6 +91,14 @@ public class PlayerController : MonoBehaviour
         {
             Dash();
         }
+    }
+
+    private void GetDirectionPlayerMove()
+    {
+        dirMove = inputController.Gameplay.Movement.ReadValue<Vector2>();
+        animator.SetFloat("Horizontal", dirMove.x);
+        animator.SetFloat("Vertical", dirMove.y);
+        animator.SetFloat("Speed", dirMove.sqrMagnitude);
     }
 
     private void Move()
@@ -99,29 +110,41 @@ public class PlayerController : MonoBehaviour
         }
 
         //caculate velocity
-        rb.velocity = dirMove * speed;
+        rb.velocity = dirMove * PlayerStat.instance.agility;
         //set animation parameter
-        animator.SetBool("Run", dirMove.x != 0 || dirMove.y != 0);
+        //animator.SetBool("Run", dirMove.x != 0 || dirMove.y != 0);
     }
 
-    //player flip with mouse direction 
-    private void FacingWithMouse()
+    private void AttackWithMouseDirection()
     {
-        //get mouse position
-        Vector3 mouPos = Input.mousePosition;
-        //get player position
-        Vector3 playerScreenLocation = Camera.main.WorldToScreenPoint(transform.position);
-
-        if(mouPos.x < playerScreenLocation.x)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            facingLeft = false;
-            transform.rotation = Quaternion.Euler(0, -180, 0);
+            //If pause game, stop input
+            if (Time.timeScale == 0)
+            {
+                return;
+            }
+
+            animator.SetTrigger("Attack");
+        }
+
+        //Get the mouse position 
+        Vector3 mouPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouDirection = (mouPos - PlayerController.instance.transform.position).normalized;
+        Vector2 mouDirection_Sign = Vector2.zero;
+
+        //Set sign index to prevent blend tree
+        if (Mathf.Abs(mouDirection.x) > Mathf.Abs(mouDirection.y))
+        {
+            mouDirection_Sign = new Vector2(Mathf.Sign(mouDirection.x), 0);
         }
         else
         {
-            facingLeft = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            mouDirection_Sign = new Vector2(0, Mathf.Sign(mouDirection.y));
         }
+
+        animator.SetFloat("MouseX", mouDirection_Sign.x);
+        animator.SetFloat("MouseY", mouDirection_Sign.y);
     }
 
     //dash
@@ -129,12 +152,11 @@ public class PlayerController : MonoBehaviour
     {
         if (canDash)
         {
-            speed += dashForce;
+            PlayerStat.instance.agility += dashForce;
             //turn on trailRenderer
             trailRenderer.emitting = true;
             StartCoroutine(DashRoutine());
         }
-        
     }
 
     public IEnumerator DashRoutine()
@@ -142,7 +164,7 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         //wait time to dash
         yield return new WaitForSeconds(dashTime);
-        speed -= dashForce;
+        PlayerStat.instance.agility -= dashForce;
         //turn off trailRenderer
         trailRenderer.emitting = false;
         //wait time dash cooldown

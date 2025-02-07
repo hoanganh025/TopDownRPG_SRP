@@ -264,16 +264,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 6084931699284829353}
   maxHealth: 3
-  exp: 50
+  exp: 130
+  damage: 0
   randomMovementRange: 5
   randomMovementSpeed: 1
   rigidBody2D: {fileID: 8704143476477888471}
   isFacingRight: 1
+  isDeath: 0
+  playerHeal: {fileID: 0}
+  player: {fileID: 0}
   animator: {fileID: 0}
-  enemyStateMachine: {fileID: 0}
-  enemyPatrolState: {fileID: 0}
-  enemyChaseState: {fileID: 0}
-  enemyAttackState: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &5354988594456389179
 GameObject:
   m_ObjectHideFlags: 0

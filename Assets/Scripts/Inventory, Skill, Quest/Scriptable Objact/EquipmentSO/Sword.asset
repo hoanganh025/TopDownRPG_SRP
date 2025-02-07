@@ -19,3 +19,4 @@ MonoBehaviour:
   agility: 1
   mana: 0
   AP: 0
+  itemType: 8

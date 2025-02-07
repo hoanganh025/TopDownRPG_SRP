@@ -8,6 +8,8 @@ public class EquipmentSO : ScriptableObject
     public string itemName;
     public int health, attack, defense, agility, mana, AP;
 
+    public ItemType itemType;
+
     //When equip gear, plus item's parameter to player stats
     public void EquipGear()
     {

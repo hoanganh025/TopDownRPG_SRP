@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     public Animator animator;
     public EnemyHealthBar healthBar;
-    private Flash flash;
+    protected Flash flash;
 
     public EnemyStateMachine enemyStateMachine;
     public EnemyPatrolState enemyPatrolState;
@@ -49,7 +49,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
         playerHeal = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerHeal>();
         player = GameObject.FindWithTag("Player");
-        flash = GameObject.Find("Boss").GetComponent<Flash>();
     }
 
     protected virtual void Start()
@@ -177,7 +176,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         playerHeal.takeDamage(_damage);
     }
 
-    public void DamageToPlayer(PlayerHeal playerHeal)
+    //Attach in end frame slime attack
+    public void DamageToPlayerNoParameter()
     {
         playerHeal.takeDamage(damage);
     }
