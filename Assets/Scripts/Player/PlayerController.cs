@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 dirMove;
     private TrailRenderer trailRenderer;
+    private PlayerMana playerMana;
 
     // singleton
     public static PlayerController instance;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         sprite = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
         trailRenderer = rb.GetComponent<TrailRenderer>();
+        playerMana = GetComponentInChildren<PlayerMana>();
     }
 
     private void OnEnable()
@@ -76,18 +78,15 @@ public class PlayerController : MonoBehaviour
         GetDirectionPlayerMove();
 
         AttackWithMouseDirection();
-
-        
     }
-
+    
     private void FixedUpdate()
     {
         Move();
         //FacingWithMouse();
 
         //Dash when space down
-        //if (Input.GetKeyDown(KeyCode.Space))
-        if (inputController.Gameplay.Dash.triggered)
+        if (inputController.Gameplay.Dash.WasPressedThisFrame())
         {
             Dash();
         }
@@ -150,9 +149,11 @@ public class PlayerController : MonoBehaviour
     //dash
     private void Dash()
     {
-        if (canDash)
+        if (canDash && playerMana.CheckMana(5))
         {
+            playerMana.ConsumptionMana(5);
             PlayerStat.instance.agility += dashForce;
+            
             //turn on trailRenderer
             trailRenderer.emitting = true;
             StartCoroutine(DashRoutine());

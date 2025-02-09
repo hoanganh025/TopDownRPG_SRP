@@ -6,16 +6,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemSO", menuName = "ScriptableObject/ItemSO")]
 public class ItemSO : ScriptableObject
 {
-    [SerializeField] public string itemName;
+    public string itemName;
     [SerializeField] private Sprite itemSprite;
     //[SerializeField] private bool haveDuration;
     [SerializeField] private float Heal, Mana, Ability;
     [TextArea][SerializeField] private string Description;
-    [SerializeField] private ItemType itemType;
+    public ItemType itemType;
 
     public bool UseItem()
     {
-        if(Heal != 0)
+        if(Heal != 0 && itemType == ItemType.comsumable)
         {
             PlayerHeal playerHeal = GameObject.Find("PlayerHeal").GetComponent<PlayerHeal>();
             //If player heal is full, item heal can't be used

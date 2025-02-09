@@ -12,9 +12,12 @@ public class Item : MonoBehaviour
     
     private InventoryManager inventoryManager;
 
+    private ItemSOLibrary itemSOLibrary;
+
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        itemSOLibrary = GameObject.Find("InventoryCanvas").GetComponent<ItemSOLibrary>();
     }
 
     //if player collides with an item, call function AddItem from InventoryManager with 3 parameter 

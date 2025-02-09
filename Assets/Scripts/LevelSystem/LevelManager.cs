@@ -42,18 +42,22 @@ public class LevelManager : MonoBehaviour
     {
         while (currentExp >= targetExp)
         {
-            GameEventManager.instance.levelEvent.LevelUp();
             currentLevel++;
             currentExp -= targetExp;
             targetExp += targetExp * expGrowthMultipler;
-            Debug.Log(targetExp);
 
             //Stat growth when level up
             PlayerStat.instance.health += 2;
+            PlayerStat.instance.defense += 1;
             PlayerStat.instance.attack += 1;
+            PlayerStat.instance.mana += 5;
+            PlayerStat.instance.agility += 0.2f;
+            PlayerStat.instance.AP += 3f;
             
             //After growth, update stat ui
             PlayerStat.instance.UpdatePlayerStat();
+            //Fill heal and mana bar after level up
+            GameEventManager.instance.levelEvent.LevelUp();
         }
     }
 

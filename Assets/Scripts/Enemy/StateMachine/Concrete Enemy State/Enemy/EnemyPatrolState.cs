@@ -23,13 +23,13 @@ public class EnemyPatrolState : EnemyState
         targetPos = RandomPosInCircle();
         enemy.animator.SetBool("Patrol", true);
 
-        Debug.Log("Start patrol state");
+        //Debug.Log("Start patrol state");
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        Debug.Log("End patrol state");
+        //Debug.Log("End patrol state");
     }
 
     //This is Update()
