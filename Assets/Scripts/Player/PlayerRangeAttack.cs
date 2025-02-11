@@ -19,6 +19,8 @@ public class PlayerRangeAttack : MonoBehaviour
     {
         playerMana = GetComponent<PlayerMana>();
         playerMana = GetComponentInChildren<PlayerMana>();
+        //When start, player can use skill 
+        timer = timeCooldown;
     }
 
     void Update()

@@ -15,6 +15,20 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Slider expBar;
 
+    public static LevelManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnEnable()
     {
         GameEventManager.instance.levelEvent.onExpGained += IncreaseExp;

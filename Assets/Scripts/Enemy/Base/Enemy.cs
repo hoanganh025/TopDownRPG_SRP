@@ -22,15 +22,18 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public bool isChaseTrigger { get; set; }
     public bool isAttackTrigger { get; set; }
 
+    [Header("Item drop")]
+    public GameObject[] listItemDrop;
+
+    [Header("Not need to set")]
     public Rigidbody2D rigidBody2D;
     public bool isFacingRight = true;
     public bool isDeath = false;
-
     public PlayerHeal playerHeal;
     public GameObject player;
-
     public Animator animator;
     public EnemyHealthBar healthBar;
+
     protected Flash flash;
 
     public EnemyStateMachine enemyStateMachine;
@@ -96,6 +99,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     {
         if (currentHealth <= 0 && !isDeath)
         {
+            DropItem();
             //Animation death
             animator.SetTrigger("Death");
             isDeath = true;
@@ -109,6 +113,16 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
             //flash.gameObject.SetActive(false);
             slider.enabled = false;
             this.enabled = false;
+        }
+    }
+
+    private void DropItem()
+    {
+        Vector3 spawnPos = transform.position;
+        for (int i = 0; i < listItemDrop.Length; i++)
+        {
+            Vector3 randomOffset = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), 0);
+            Instantiate(listItemDrop[i], this.transform.position + randomOffset, Quaternion.identity);
         }
     }
 

@@ -15,12 +15,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     //Enemy Health bar
     private EnemyHealthBar healthBar;
 
-    //delegete
-    public delegate void OnHit();
-    //delegete instance
-    public static event OnHit onHit;
-
-
     void Start()
     {
         currentHealth = maxHealth;

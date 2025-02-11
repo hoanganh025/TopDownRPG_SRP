@@ -6,10 +6,10 @@ public class Entrance : MonoBehaviour
 {
     private void Start()
     {
-        /*if (transitionName == SceneController.getinstanceSceneManagement().sceneTransitionName)
+        //If not the first time player init, player will appear in entrance area
+        if(SceneController.firstTimeLoadScene == true)
         {
             PlayerController.instance.transform.position = this.transform.position;
-        }*/
-        PlayerController.instance.transform.position = this.transform.position;
+        }
     }
 }

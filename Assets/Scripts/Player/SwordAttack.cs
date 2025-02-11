@@ -38,25 +38,21 @@ public class SwordAttack : MonoBehaviour
     public void AttackUp()
     {
         AttackWithDirection(Vector2.up, new Vector2(0, 1));
-        Debug.Log("Attack Up");
     }
 
     public void AttackDown()
     {
         AttackWithDirection(Vector2.down, new Vector2(0, -0.15f));
-        Debug.Log("Attack Down");
     }
 
     public void AttackLeft()
     {
         AttackWithDirection(Vector2.left, new Vector2(-0.7f, 0.5f));
-        Debug.Log("Attack Left");
     }
 
     public void AttackRight()
     {
         AttackWithDirection(Vector2.right, new Vector2(0.7f, 0.5f));
-        Debug.Log("Attack Right");
     }
 
     private void DisableCollider()

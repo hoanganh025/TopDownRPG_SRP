@@ -14,11 +14,11 @@ public class ArenaExit : MonoBehaviour
         {
             if (goNextLevel)
             {
-                SceneController.instanceSceneManager.NextScene();
+                SceneController.instance.NextScene();
             }
             else
             {
-                SceneController.instanceSceneManager.LoadSceneByName(sceneName);
+                SceneController.instance.LoadSceneByName(sceneName);
             }
         }
     }
