@@ -102,8 +102,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        //AudioManager.instance.playSFX(AudioManager.instance.playerFootStep);
         //if magnitude > 1 then round the dirMove because normalized round even if vecto < 1
-        if(dirMove.magnitude > 1f)
+        if (dirMove.magnitude > 1f)
         {
             dirMove = dirMove.normalized;
         }
@@ -112,6 +113,10 @@ public class PlayerController : MonoBehaviour
         rb.velocity = dirMove * PlayerStat.instance.agility;
         //set animation parameter
         //animator.SetBool("Run", dirMove.x != 0 || dirMove.y != 0);
+/*        if(dirMove.x != 0 || dirMove.y != 0)
+        {
+            AudioManager.instance.playSFX(AudioManager.instance.playerFootStep);
+        }*/
     }
 
     private void AttackWithMouseDirection()
@@ -151,6 +156,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canDash && playerMana.CheckMana(5))
         {
+            AudioManager.instance.playSFX(AudioManager.instance.playerDash);
             playerMana.ConsumptionMana(5);
             PlayerStat.instance.agility += dashForce;
             
@@ -171,5 +177,10 @@ public class PlayerController : MonoBehaviour
         //wait time dash cooldown
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    public void footStep()
+    {
+        AudioManager.instance.playSFX(AudioManager.instance.playerFootStep);
     }
 }

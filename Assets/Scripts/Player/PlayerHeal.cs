@@ -37,6 +37,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
 
     public void takeDamage(float damage)
     {
+        AudioManager.instance.playSFX(AudioManager.instance.playerHurt);
         float damageAfterArmor = CaculatedDamage(damage);
         //set health always between 0 and starting health 0<currentHealth<startingHealth
         currentHealth = Mathf.Clamp(currentHealth - damageAfterArmor, 0, PlayerStat.instance.health);

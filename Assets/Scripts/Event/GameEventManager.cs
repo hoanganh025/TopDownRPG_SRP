@@ -11,6 +11,7 @@ public class GameEventManager : MonoBehaviour
     public InputEvent inputEvent;
     public LevelEvent levelEvent;
     public GoldEvent goldEvent;
+    public CollectedQuestItemEvent collectedQuestItemEvent;
 
     private void Awake()
     {
@@ -30,5 +31,6 @@ public class GameEventManager : MonoBehaviour
         inputEvent = new InputEvent();
         levelEvent = new LevelEvent();
         goldEvent = new GoldEvent();
+        collectedQuestItemEvent = new CollectedQuestItemEvent();
     }
 }

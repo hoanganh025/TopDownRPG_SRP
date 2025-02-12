@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class Item : MonoBehaviour
 {
     public string itemName;
@@ -26,7 +28,8 @@ public class Item : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //Call event
-            GameEventManager.instance.miscEvent.ItemCollected();
+            GameEventManager.instance.collectedQuestItemEvent.CollectedQuestItem(this.gameObject);
+            //GameEventManager.instance.miscEvent.ItemCollected();
 
             //Get the number of left over item after add in to slot item 
             int leftOverItems = inventoryManager.AddItem(itemName, itemQuantity, itemSprite, itemDescription, itemType);

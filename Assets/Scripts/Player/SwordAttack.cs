@@ -37,21 +37,25 @@ public class SwordAttack : MonoBehaviour
     //Set this in end of frame attack up animation
     public void AttackUp()
     {
+        AudioManager.instance.playSFX(AudioManager.instance.slashSword);
         AttackWithDirection(Vector2.up, new Vector2(0, 1));
     }
 
     public void AttackDown()
     {
+        AudioManager.instance.playSFX(AudioManager.instance.slashSword);
         AttackWithDirection(Vector2.down, new Vector2(0, -0.15f));
     }
 
     public void AttackLeft()
     {
+        AudioManager.instance.playSFX(AudioManager.instance.slashSword);
         AttackWithDirection(Vector2.left, new Vector2(-0.7f, 0.5f));
     }
 
     public void AttackRight()
     {
+        AudioManager.instance.playSFX(AudioManager.instance.slashSword);
         AttackWithDirection(Vector2.right, new Vector2(0.7f, 0.5f));
     }
 

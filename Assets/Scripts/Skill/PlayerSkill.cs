@@ -14,6 +14,7 @@ public class PlayerSkill : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        AudioManager.instance.playSFX(AudioManager.instance.magicShoot);
     }
 
     private void Update()
@@ -21,6 +22,7 @@ public class PlayerSkill : MonoBehaviour
         timer += Time.deltaTime;
         if(timer > timeLife)
         {
+            AudioManager.instance.playSFX(AudioManager.instance.magicExplore);
             animator.SetTrigger("Explosion");
             timer = 0;
         }
@@ -30,6 +32,7 @@ public class PlayerSkill : MonoBehaviour
     {
         if (collision.TryGetComponent<IDamageable>(out var damageable))
         {
+            AudioManager.instance.playSFX(AudioManager.instance.magicExplore);
             rb.velocity = Vector2.zero;
             damageable.takeDamage(PlayerStat.instance.AP);
             animator.SetTrigger("Explosion");
