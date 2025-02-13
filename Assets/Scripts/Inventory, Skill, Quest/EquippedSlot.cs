@@ -33,8 +33,8 @@ public class EquippedSlot : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
-        equipmentSOLibrary = GameObject.Find("InventoryCanvas").GetComponent<EquipmentSOLibrary>();
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        equipmentSOLibrary = GameObject.Find("InventoryManager").GetComponent<EquipmentSOLibrary>();
     }
 
     public void EquipGear(Sprite _itemSprite, string _itemName, string _itemDescription)

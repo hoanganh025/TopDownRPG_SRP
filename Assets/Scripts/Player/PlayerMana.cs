@@ -83,7 +83,6 @@ public class PlayerMana : MonoBehaviour
     public void Fill()
     {
         currentMana = PlayerStat.instance.mana; 
-        Debug.Log("Player fill mana: " + currentMana);
         UpdateManaBar();
     }
 }

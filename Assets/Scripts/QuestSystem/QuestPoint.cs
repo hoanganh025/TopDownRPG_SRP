@@ -7,10 +7,13 @@ public class QuestPoint : MonoBehaviour
 {
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questInfoForPoint;
+    [SerializeField] private DialogTrigger dialogTrigger;
 
     [Header("Config")]
     [SerializeField] private bool startPoint = false;
     [SerializeField] private bool finishPoint = false;
+
+    public BoxCollider2D bossRoomDoorCollider;
 
     private bool playerIsNear = false;
     private string questID;
@@ -41,7 +44,9 @@ public class QuestPoint : MonoBehaviour
         if(!playerIsNear)
         {
             return;
-        } 
+        }
+
+        dialogTrigger.TriggerDialog();
 
         //Start or finish quest
         if(currentQuestState.Equals(QuestState.CAN_START) && startPoint)
@@ -54,6 +59,11 @@ public class QuestPoint : MonoBehaviour
         {
             //Call FinishQuest from QuestManager
             GameEventManager.instance.questEvent.FinishQuest(questID);
+            //If finish quest collect key, open boss room
+            if (bossRoomDoorCollider != null)
+            {
+                bossRoomDoorCollider.isTrigger = true;
+            }
             Debug.Log("Tra nhiem vu");
         }
     }

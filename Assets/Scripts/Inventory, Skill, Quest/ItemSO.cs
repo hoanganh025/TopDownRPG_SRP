@@ -29,6 +29,21 @@ public class ItemSO : ScriptableObject
                 return true;
             }
         }
+
+        if (Mana != 0 && itemType == ItemType.comsumable)
+        {
+            PlayerMana playerMana = GameObject.Find("PlayerMana").GetComponent<PlayerMana>();
+            //If player mana is full, item mana can't be used
+            if (playerMana.currentMana == PlayerStat.instance.mana)
+            {
+                return false;
+            }
+            else
+            {
+                playerMana.RecoveryMana(Mana);
+                return true;
+            }
+        }
         return false;
     }
 }

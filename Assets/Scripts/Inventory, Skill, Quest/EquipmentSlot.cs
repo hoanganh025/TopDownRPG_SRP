@@ -31,7 +31,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     private void Start()
     {
-        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
     }
 
     //Add info of item to this slot

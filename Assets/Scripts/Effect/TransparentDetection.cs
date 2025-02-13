@@ -12,7 +12,7 @@ public class TransparentDetection : MonoBehaviour
     //when ontriggerenter with object, change transparency to fade out 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())
+        if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
         {
             if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
             {

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float maxExp;
     
     public bool facingLeft = true;
+    public bool isUIOpen = false;
 
     private InputController inputController;
     private Rigidbody2D rb;
@@ -75,6 +76,8 @@ public class PlayerController : MonoBehaviour
     {
         //get direction and vecto
         //dirMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (isUIOpen) return;
+
         GetDirectionPlayerMove();
 
         AttackWithMouseDirection();
@@ -82,8 +85,8 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (isUIOpen) return;
         Move();
-        //FacingWithMouse();
 
         //Dash when space down
         if (inputController.Gameplay.Dash.WasPressedThisFrame())
@@ -102,7 +105,6 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        //AudioManager.instance.playSFX(AudioManager.instance.playerFootStep);
         //if magnitude > 1 then round the dirMove because normalized round even if vecto < 1
         if (dirMove.magnitude > 1f)
         {
@@ -113,10 +115,6 @@ public class PlayerController : MonoBehaviour
         rb.velocity = dirMove * PlayerStat.instance.agility;
         //set animation parameter
         //animator.SetBool("Run", dirMove.x != 0 || dirMove.y != 0);
-/*        if(dirMove.x != 0 || dirMove.y != 0)
-        {
-            AudioManager.instance.playSFX(AudioManager.instance.playerFootStep);
-        }*/
     }
 
     private void AttackWithMouseDirection()

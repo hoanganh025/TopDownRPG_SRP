@@ -7,6 +7,7 @@ public class ArenaExit : MonoBehaviour
 {
     [SerializeField] private bool goNextLevel;
     [SerializeField] private string sceneName;
+    public DialogTrigger dialogTrigger;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,6 +21,14 @@ public class ArenaExit : MonoBehaviour
             {
                 SceneController.instance.LoadSceneByName(sceneName);
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            dialogTrigger.TriggerDialog();
         }
     }
 }

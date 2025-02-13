@@ -50,7 +50,7 @@ MonoBehaviour:
   itemName: HealingPotion
   itemQuantity: 1
   itemSprite: {fileID: 1465107167, guid: ae53b232f638ffc4eb21871247cb4c84, type: 3}
-  itemDescription: Healing + 5
+  itemDescription: Heal + 5
   itemType: 1
 --- !u!212 &2582389336183703091
 SpriteRenderer:

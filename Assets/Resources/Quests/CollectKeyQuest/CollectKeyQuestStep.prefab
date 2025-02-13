@@ -47,6 +47,6 @@ MonoBehaviour:
   listKey:
   - {fileID: 919479423258585327, guid: 8318f03b82231bc45927ae606cb7def3, type: 3}
   - {fileID: 617193198026760459, guid: aa0ef64bb6821154f9a63afd9b8e0cbf, type: 3}
-  - {fileID: 3120832753753723722, guid: 25888743e9726074dab321c3394fce67, type: 3}
+  bossRoomDoor: {fileID: 0}
   keyCollected: 0
   keyToComplete: 0

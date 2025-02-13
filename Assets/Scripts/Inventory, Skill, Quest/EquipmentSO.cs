@@ -13,28 +13,26 @@ public class EquipmentSO : ScriptableObject
     //When equip gear, plus item's parameter to player stats
     public void EquipGear()
     {
-        PlayerStat playerStat = GameObject.Find("StatPanel").GetComponent<PlayerStat>();
-        playerStat.health += this.health;
-        playerStat.attack += this.attack;
-        playerStat.defense += this.defense;
-        playerStat.agility += this.agility;
-        playerStat.mana += this.mana;
-        playerStat.AP += this.AP;
+        PlayerStat.instance.health += this.health;
+        PlayerStat.instance.attack += this.attack;
+        PlayerStat.instance.defense += this.defense;
+        PlayerStat.instance.agility += this.agility;
+        PlayerStat.instance.mana += this.mana;
+        PlayerStat.instance.AP += this.AP;
 
-        playerStat.UpdatePlayerStat();
+        PlayerStat.instance.UpdatePlayerStat();
     }
 
     //When equip gear, minus item's parameter to player stats
     public void UnEquipGear()
     {
-        PlayerStat playerStat = GameObject.Find("StatPanel").GetComponent<PlayerStat>();
-        playerStat.health -= this.health;
-        playerStat.attack -= this.attack;
-        playerStat.defense -= this.defense;
-        playerStat.agility -= this.agility;
-        playerStat.mana -= this.mana;
-        playerStat.AP -= this.AP;
+        PlayerStat.instance.health -= this.health;
+        PlayerStat.instance.attack -= this.attack;
+        PlayerStat.instance.defense -= this.defense;
+        PlayerStat.instance.agility -= this.agility;
+        PlayerStat.instance.mana -= this.mana;
+        PlayerStat.instance.AP -= this.AP;
 
-        playerStat.UpdatePlayerStat();
+        PlayerStat.instance.UpdatePlayerStat();
     }
 }
