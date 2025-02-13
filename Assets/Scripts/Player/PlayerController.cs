@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool facingLeft = true;
     public bool isUIOpen = false;
 
-    private InputController inputController;
+    public InputController inputController;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;

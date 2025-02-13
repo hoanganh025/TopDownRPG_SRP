@@ -41,7 +41,8 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         //put key E down to open/close Inventory Menu
-        if (Input.GetButtonDown("InventoryMenu"))
+        //if (Input.GetButtonDown("InventoryMenu"))
+        if (PlayerController.instance.inputController.Gameplay.Inventory.WasPressedThisFrame())
         {
             Inventory();
         }
