@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] Animator animatorScene;
+    public Entrance entrance;
     public string sceneTransitionName { get; private set; }
     public GameObject firstPosPlayerInit;
     public static bool firstTimeLoadScene = false;
+    public QuestPoint questPoint;
 
     //singleton
     public static SceneController instance;
@@ -23,6 +25,12 @@ public class SceneController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
@@ -38,6 +46,7 @@ public class SceneController : MonoBehaviour
     public void NextScene()
     {
         StartCoroutine(LoadSceneRoutine());
+        GameEventManager.instance.sceneTransitionEvent.QuestSceneTransition(questPoint.questID, questPoint.currentQuestState);
     }
 
     public void LoadSceneByName(string _sceneName)
@@ -64,5 +73,10 @@ public class SceneController : MonoBehaviour
         //Load scene
         SceneManager.LoadSceneAsync(_sceneName);
         animatorScene.SetTrigger("Start");
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        entrance = GameObject.Find("AreaEntrance").GetComponent<Entrance>();
     }
 }

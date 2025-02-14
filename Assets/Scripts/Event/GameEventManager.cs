@@ -7,11 +7,12 @@ public class GameEventManager : MonoBehaviour
     public static GameEventManager instance {  get; private set; }
 
     public QuestEvent questEvent;
-    public MiscEvent miscEvent;
+    public PlayerDeathEvent playerDeathEvent;
     public InputEvent inputEvent;
     public LevelEvent levelEvent;
     public GoldEvent goldEvent;
     public CollectedQuestItemEvent collectedQuestItemEvent;
+    public SceneTransitionEvent sceneTransitionEvent;
 
     private void Awake()
     {
@@ -27,10 +28,11 @@ public class GameEventManager : MonoBehaviour
 
         //Initialize
         questEvent = new QuestEvent();
-        miscEvent = new MiscEvent();
+        playerDeathEvent = new PlayerDeathEvent();
         inputEvent = new InputEvent();
         levelEvent = new LevelEvent();
         goldEvent = new GoldEvent();
         collectedQuestItemEvent = new CollectedQuestItemEvent();
+        sceneTransitionEvent = new SceneTransitionEvent();
     }
 }

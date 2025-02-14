@@ -14,10 +14,10 @@ public class QuestPoint : MonoBehaviour
     [SerializeField] private bool finishPoint = false;
 
     public BoxCollider2D bossRoomDoorCollider;
+    public string questID;
+    public QuestState currentQuestState;
 
     private bool playerIsNear = false;
-    private string questID;
-    private QuestState currentQuestState;
     private QuestIcon questIcon;
 
     private void Awake()

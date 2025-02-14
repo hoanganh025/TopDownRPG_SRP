@@ -22,6 +22,7 @@ public class QuestManager : MonoBehaviour
         GameEventManager.instance.questEvent.onFinishQuest += FinishQuest;
 
         GameEventManager.instance.questEvent.onQuestStateChangeState += QuestStepStateChange;
+        GameEventManager.instance.sceneTransitionEvent.onQuestSceneTransition += ChangeQuestState;
     }
 
     private void OnDisable()
@@ -31,6 +32,7 @@ public class QuestManager : MonoBehaviour
         GameEventManager.instance.questEvent.onFinishQuest -= FinishQuest;
 
         GameEventManager.instance.questEvent.onQuestStateChangeState -= QuestStepStateChange;
+        GameEventManager.instance.sceneTransitionEvent.onQuestSceneTransition -= ChangeQuestState;
     }
 
     private void Start()

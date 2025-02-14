@@ -32,12 +32,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
     private void Awake()
     {
-        itemQuantityText.enabled = false;
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
     }
 
     private void Start()
     {
-        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        
     }
 
     //Add info of item to this slot
@@ -79,8 +79,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         }
 
         //Set text quantity, if this item slot can contain all item, set quantity and return number of left over item is 0
-        itemQuantityText.text = this.itemQuantity.ToString();
         itemQuantityText.enabled = true;
+
+        itemQuantityText.text = this.itemQuantity.ToString();
         return 0;
     }
 

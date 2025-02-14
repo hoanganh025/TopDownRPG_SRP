@@ -77,6 +77,7 @@ public class PlayerHeal : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             //animation death
+            GameEventManager.instance.playerDeathEvent.PlayerDeath();
             Debug.Log("Death");
         }
     }

@@ -7,16 +7,6 @@ public class CollectCoinQuestStep : QuestStep
     public int coinCollected = 0;
     public int coinToComplete = 5;
 
-    private void OnEnable()
-    {
-        GameEventManager.instance.miscEvent.onItemCollected += CoinCollected;
-    }
-
-    private void OnDisable()
-    {
-        GameEventManager.instance.miscEvent.onItemCollected -= CoinCollected;
-    }
-
     private void CoinCollected()
     {
         if(coinCollected < coinToComplete)

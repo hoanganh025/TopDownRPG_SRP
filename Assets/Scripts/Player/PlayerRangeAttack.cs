@@ -41,19 +41,20 @@ public class PlayerRangeAttack : MonoBehaviour
             //Get the mouse position 
             Vector3 mouPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 mouDirection = (mouPos - PlayerController.instance.transform.position).normalized;
-            
-            //Create projecttile
-            GameObject skill = Instantiate(skillPrefab, shootPos.transform.position, Quaternion.identity);
-            //Get rigidboy of this projecttile
-            rb = skill.GetComponent<Rigidbody2D>();
-
-            //Add force to projecttile
-            rb.AddForce(mouDirection * speed, ForceMode2D.Impulse);
 
             //Convert angle radian to degree
             float angle = Mathf.Atan2(mouDirection.y, mouDirection.x) * Mathf.Rad2Deg;
             //Add rotation to projecttile
-            skill.transform.rotation = Quaternion.Euler(0, 0, angle);
+            shootPos.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            //Create projecttile
+            GameObject skill = Instantiate(skillPrefab, shootPos.transform.position, Quaternion.Euler(0, 0, angle));
+            //Get rigidboy of this projecttile
+            rb = skill.GetComponent<Rigidbody2D>();
+
+            //Add force to projecttile
+            rb.AddForce(shootPos.transform.right * speed, ForceMode2D.Impulse);
+
             timer = 0;
         }
 

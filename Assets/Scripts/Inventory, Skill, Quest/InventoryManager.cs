@@ -17,12 +17,11 @@ public class InventoryManager : MonoBehaviour
 
     public delegate void dgtCloseInventory();
     public static event dgtCloseInventory _dgtCloseInventory;
+    public GameObject expBar;
 
     public static InventoryManager instance;
     private void Awake()
     {
-        InventoryMenu.SetActive(false);
-
         if(instance == null)
         {
             instance = this;
@@ -36,6 +35,7 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         itemSOLibrary = GetComponent<ItemSOLibrary>();
+        InventoryMenu.SetActive(false);
     }
 
     void Update()
@@ -54,6 +54,7 @@ public class InventoryManager : MonoBehaviour
         if ( menuActivated)
         {
             Time.timeScale = 1;
+            expBar.SetActive(true);
             InventoryMenu.SetActive(false);
             menuActivated = false;
             //Event inventory close
@@ -64,7 +65,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Time.timeScale = 0;
-            
+            expBar.SetActive(false);
             InventoryMenu.SetActive(true);
             menuActivated = true;
         }

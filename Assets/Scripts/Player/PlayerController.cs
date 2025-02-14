@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool isUIOpen = false;
 
     public InputController inputController;
+    public GameObject deathMenu;
+
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
         {
             inputController.Enable();
         }
+
+        GameEventManager.instance.playerDeathEvent.onPlayerDeath += Death;
     }
 
     private void OnDisable()
@@ -64,6 +68,8 @@ public class PlayerController : MonoBehaviour
         {
             inputController.Disable();
         }
+
+        GameEventManager.instance.playerDeathEvent.onPlayerDeath -= Death;
     }
 
     void Start()
@@ -180,5 +186,18 @@ public class PlayerController : MonoBehaviour
     public void footStep()
     {
         AudioManager.instance.playSFX(AudioManager.instance.playerFootStep);
+    }
+
+    private void Death()
+    {
+        inputController.Disable();
+        deathMenu.SetActive(true);
+        animator.SetTrigger("Death");
+    }
+
+    public void DisablePlayer()
+    {
+        Time.timeScale = 0;
+        gameObject.SetActive(false);
     }
 }

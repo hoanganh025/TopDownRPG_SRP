@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class SceneTransitionEvent
 {
-    public event Action onSceneTransition;
-    public void SceneTransition()
+    public event Action<string, QuestState> onQuestSceneTransition;
+    public void QuestSceneTransition(string id, QuestState state)
     {
-
+        if (onQuestSceneTransition != null)
+        {
+            onQuestSceneTransition(id, state);
+        }
     }
 }
