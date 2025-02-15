@@ -30,7 +30,7 @@ public class TransparentDetection : MonoBehaviour
     //when ontriggerexit with object, change transparency to fade in 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())
+        if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
         {
             if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
             {

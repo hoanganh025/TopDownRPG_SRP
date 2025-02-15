@@ -14048,6 +14048,8 @@ MonoBehaviour:
   currentExp: 0
   maxExp: 0
   facingLeft: 1
+  isUIOpen: 0
+  deathMenu: {fileID: 0}
 --- !u!50 &785144696
 Rigidbody2D:
   serializedVersion: 4
@@ -19771,6 +19773,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 760244568}
     m_Modifications:
+    - target: {fileID: 679376844217805259, guid: ae02e56b4b6aaaf42b2f74fba2b55f33, type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013257225171682901, guid: ae02e56b4b6aaaf42b2f74fba2b55f33, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013257225171682901, guid: ae02e56b4b6aaaf42b2f74fba2b55f33, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4928773725361192372, guid: ae02e56b4b6aaaf42b2f74fba2b55f33, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9
@@ -20077,6 +20091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goNextLevel: 0
   sceneName: Scene1
+  dialogTrigger: {fileID: 0}
 --- !u!4 &7272223039329226016
 Transform:
   m_ObjectHideFlags: 0

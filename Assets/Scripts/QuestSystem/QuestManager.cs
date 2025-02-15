@@ -181,6 +181,9 @@ public class QuestManager : MonoBehaviour
         {
             SaveQuest(quest);
         }
+
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
     }
 
     private void SaveQuest(Quest quest)

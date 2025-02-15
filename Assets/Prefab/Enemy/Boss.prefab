@@ -98,7 +98,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10.01
+  m_Radius: 7.04
 --- !u!114 &161644399941014419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5411853464026924934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -449,8 +449,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 890, y: -614}
-  m_SizeDelta: {x: 165, y: 90}
+  m_AnchoredPosition: {x: 952.83856, y: -614}
+  m_SizeDelta: {x: 400, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2387061546495324724
 MonoBehaviour:
@@ -570,7 +570,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 7.04
+  m_Radius: 4.7
 --- !u!114 &7573472159531916409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,8 +697,8 @@ RectTransform:
   m_Father: {fileID: 5411853464026924934}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000022888184, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000015258789, y: 0}
   m_SizeDelta: {x: -5, y: -64.1927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6608446357832746270
@@ -983,7 +983,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.88
+  m_Radius: 2.45
 --- !u!114 &1948316623594839201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,10 +1028,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937554498608387458}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.64, y: -3.64, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9181334313229221118}
   - {fileID: 8477298331007225912}
@@ -1248,7 +1248,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fillHeathBar: {fileID: 3742720881437584010}
-  offSet: {x: 0, y: 1.8, z: 0}
+  offSet: {x: 0, y: 2.45, z: 0}
 --- !u!114 &679376844217805259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,11 +1262,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 2387061546495324724}
-  maxHealth: 10
+  maxHealth: 200
   exp: 1000
-  damage: 1
+  damage: 10
+  soundAttack: {fileID: 0}
   randomMovementRange: 5
   randomMovementSpeed: 1
+  listItemDrop: []
   rigidBody2D: {fileID: 7936146423818635378}
   isFacingRight: 1
   isDeath: 0

@@ -178,5 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03126344c000d7347b144aba402820ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHeal: {fileID: 0}
-  damageLaser: 5
+  damageLaser: 12

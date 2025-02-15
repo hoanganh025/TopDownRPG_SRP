@@ -33,7 +33,7 @@ public class PlayerStat : MonoBehaviour
         healthText.text = health.ToString();
         attackText.text = attack.ToString();
         defenseText.text = defense.ToString();
-        agilityText.text = agility.ToString();
+        agilityText.text = Mathf.Round(agility).ToString();
         manaText.text = mana.ToString();
         APText.text = AP.ToString();
     }

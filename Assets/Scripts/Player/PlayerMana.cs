@@ -19,12 +19,14 @@ public class PlayerMana : MonoBehaviour
     {
         GameEventManager.instance.levelEvent.onLevelUp += Fill;
         GameEventManager.instance.levelEvent.onLevelUp += UpdateManaBar;
+        GameEventManager.instance.equipWeaponEvent.onEquipped += UpdateManaBar;
     }
 
     private void OnDisable()
     {
         GameEventManager.instance.levelEvent.onLevelUp -= Fill;
         GameEventManager.instance.levelEvent.onLevelUp -= UpdateManaBar;
+        GameEventManager.instance.equipWeaponEvent.onEquipped -= UpdateManaBar;
     }
 
     void Start()

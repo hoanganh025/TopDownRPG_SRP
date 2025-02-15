@@ -36,7 +36,7 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         //If the first time play game, player init center of scene 1
-        if (firstTimeLoadScene == false)
+        if (firstTimeLoadScene == false && firstPosPlayerInit)
         {
             PlayerController.instance.transform.position = firstPosPlayerInit.transform.position;
             firstTimeLoadScene = true;
@@ -46,7 +46,10 @@ public class SceneController : MonoBehaviour
     public void NextScene()
     {
         StartCoroutine(LoadSceneRoutine());
-        GameEventManager.instance.sceneTransitionEvent.QuestSceneTransition(questPoint.questID, questPoint.currentQuestState);
+        if (questPoint)
+        {
+            GameEventManager.instance.sceneTransitionEvent.QuestSceneTransition(questPoint.questID, questPoint.currentQuestState);
+        }
     }
 
     public void LoadSceneByName(string _sceneName)

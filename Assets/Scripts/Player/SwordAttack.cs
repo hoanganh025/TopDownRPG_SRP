@@ -70,7 +70,6 @@ public class SwordAttack : MonoBehaviour
         if (collision.TryGetComponent<IDamageable>(out var enemy))
         {
             enemy.takeDamage(PlayerStat.instance.attack);
-            Debug.Log("Trigger attack collider");
         }
     }
 }

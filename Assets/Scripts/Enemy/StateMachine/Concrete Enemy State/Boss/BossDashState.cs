@@ -25,6 +25,7 @@ public class BossDashState : EnemyState
 
         playerPos = bossGolem.player.transform.position;
         bossGolem.animator.SetBool("Dash", true);
+        AudioManager.instance.playSFX(AudioManager.instance.bossDash);
         timer = 0;
         //Only damage player by body boss when in the dash state
         bossGolem.isBossDashState = true;

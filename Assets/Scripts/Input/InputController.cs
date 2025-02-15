@@ -80,6 +80,15 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Instruction"",
+                    ""type"": ""Button"",
+                    ""id"": ""c338a44d-601e-475a-bf7b-633c2258e2ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                     ""action"": ""AudioSetting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c30bfe7-c596-4346-866b-8840cd2f7f38"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Instruction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -212,6 +232,7 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         m_Gameplay_Submit = m_Gameplay.FindAction("Submit", throwIfNotFound: true);
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
         m_Gameplay_AudioSetting = m_Gameplay.FindAction("AudioSetting", throwIfNotFound: true);
+        m_Gameplay_Instruction = m_Gameplay.FindAction("Instruction", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -281,6 +302,7 @@ public partial class @InputController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Submit;
     private readonly InputAction m_Gameplay_Inventory;
     private readonly InputAction m_Gameplay_AudioSetting;
+    private readonly InputAction m_Gameplay_Instruction;
     public struct GameplayActions
     {
         private @InputController m_Wrapper;
@@ -291,6 +313,7 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         public InputAction @Submit => m_Wrapper.m_Gameplay_Submit;
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
         public InputAction @AudioSetting => m_Wrapper.m_Gameplay_AudioSetting;
+        public InputAction @Instruction => m_Wrapper.m_Gameplay_Instruction;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -318,6 +341,9 @@ public partial class @InputController: IInputActionCollection2, IDisposable
             @AudioSetting.started += instance.OnAudioSetting;
             @AudioSetting.performed += instance.OnAudioSetting;
             @AudioSetting.canceled += instance.OnAudioSetting;
+            @Instruction.started += instance.OnInstruction;
+            @Instruction.performed += instance.OnInstruction;
+            @Instruction.canceled += instance.OnInstruction;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -340,6 +366,9 @@ public partial class @InputController: IInputActionCollection2, IDisposable
             @AudioSetting.started -= instance.OnAudioSetting;
             @AudioSetting.performed -= instance.OnAudioSetting;
             @AudioSetting.canceled -= instance.OnAudioSetting;
+            @Instruction.started -= instance.OnInstruction;
+            @Instruction.performed -= instance.OnInstruction;
+            @Instruction.canceled -= instance.OnInstruction;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -403,6 +432,7 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         void OnSubmit(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnAudioSetting(InputAction.CallbackContext context);
+        void OnInstruction(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

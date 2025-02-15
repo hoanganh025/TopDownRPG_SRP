@@ -21,6 +21,7 @@ public class EquipmentSO : ScriptableObject
         PlayerStat.instance.AP += this.AP;
 
         PlayerStat.instance.UpdatePlayerStat();
+        GameEventManager.instance.equipWeaponEvent.Equipped();
     }
 
     //When equip gear, minus item's parameter to player stats
@@ -34,5 +35,6 @@ public class EquipmentSO : ScriptableObject
         PlayerStat.instance.AP -= this.AP;
 
         PlayerStat.instance.UpdatePlayerStat();
+        GameEventManager.instance.equipWeaponEvent.Equipped();
     }
 }

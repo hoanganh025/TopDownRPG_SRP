@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public float currentHealth { get; private set; }
     public int exp;
     public float damage;
+    public AudioClip soundAttack;
 
     [Header("Patrol state variable")]
     public float randomMovementRange = 5f;
@@ -188,12 +189,20 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public void DamageToPlayer(float _damage, PlayerHeal playerHeal)
     {
         playerHeal.takeDamage(_damage);
+        if (soundAttack)
+        {
+            AudioManager.instance.playSFX(soundAttack);
+        }
     }
 
     //Attach in end frame slime attack
     public void DamageToPlayerNoParameter()
     {
         playerHeal.takeDamage(damage);
+        if (soundAttack)
+        {
+            AudioManager.instance.playSFX(soundAttack);
+        }
     }
 
     public void Healing(float healAmount)

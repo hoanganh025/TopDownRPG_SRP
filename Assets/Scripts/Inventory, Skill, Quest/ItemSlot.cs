@@ -155,7 +155,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
         //Set the location
         itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1f, 0, 0);
-        itemToDrop.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+        itemToDrop.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
 
         //Minus quantity item drop
         itemQuantity -= 1;

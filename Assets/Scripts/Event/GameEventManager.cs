@@ -13,6 +13,7 @@ public class GameEventManager : MonoBehaviour
     public GoldEvent goldEvent;
     public CollectedQuestItemEvent collectedQuestItemEvent;
     public SceneTransitionEvent sceneTransitionEvent;
+    public EquipWeaponEvent equipWeaponEvent;
 
     private void Awake()
     {
@@ -34,5 +35,6 @@ public class GameEventManager : MonoBehaviour
         goldEvent = new GoldEvent();
         collectedQuestItemEvent = new CollectedQuestItemEvent();
         sceneTransitionEvent = new SceneTransitionEvent();
+        equipWeaponEvent = new EquipWeaponEvent();
     }
 }

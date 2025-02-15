@@ -16,12 +16,14 @@ public class PlayerHeal : MonoBehaviour, IDamageable
     {
         GameEventManager.instance.levelEvent.onLevelUp += Fill;
         GameEventManager.instance.levelEvent.onLevelUp += UpdateHealthBar;
+        GameEventManager.instance.equipWeaponEvent.onEquipped += UpdateHealthBar;
     }
 
     private void OnDisable()
     {
         GameEventManager.instance.levelEvent.onLevelUp -= Fill;
         GameEventManager.instance.levelEvent.onLevelUp -= UpdateHealthBar;
+        GameEventManager.instance.equipWeaponEvent.onEquipped -= UpdateHealthBar;
     }
 
     private void Start()

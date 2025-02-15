@@ -122,7 +122,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.021258593, y: -0.096957445}
@@ -263,11 +263,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 6084931699284829353}
-  maxHealth: 5
-  exp: 130
-  damage: 1
+  maxHealth: 15
+  exp: 30
+  damage: 4
+  soundAttack: {fileID: 8300000, guid: ef0229a3cce313d4594c679c637753a7, type: 3}
   randomMovementRange: 5
   randomMovementSpeed: 1
+  listItemDrop:
+  - {fileID: 2373582783706112849, guid: b32fbccc055086a47a691b8a62ac509d, type: 3}
+  - {fileID: 1027362858688746442, guid: e168e232126be724f96ee8c3206cbb6e, type: 3}
   rigidBody2D: {fileID: 8704143476477888471}
   isFacingRight: 1
   isDeath: 0

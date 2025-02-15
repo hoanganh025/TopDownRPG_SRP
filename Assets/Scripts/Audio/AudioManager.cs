@@ -21,6 +21,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip playerHurt;
     public AudioClip playerDash;
     public AudioClip playerFootStep;
+    public AudioClip blueSlimeAttack;
+    public AudioClip blackSlimeAttack;
+    public AudioClip bossAttack;
+    public AudioClip bossDash;
+    public AudioClip bossFireLaser;
+    public AudioClip bossFireHomingMissle;
 
     public static AudioManager instance;
 
@@ -39,6 +45,8 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         musicSource.clip = background;
+        //Background music loop
+        musicSource.loop = true;
         musicSource.Play();
 
         settingVolumeMenu.SetActive(false);
@@ -46,12 +54,13 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.instance.inputController.Gameplay.AudioSetting.WasPressedThisFrame())
+        if (PlayerController.instance.inputController.Gameplay.AudioSetting.WasPressedThisFrame() && PlayerController.instance != null)
         {
             AudioSetting();
         }
     }
 
+    //Active audio setting
     private void AudioSetting()
     {
         if (!isSettingVolumeActived)
@@ -73,10 +82,13 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }
 
+    //Change volume mucsic
     public void ChangeMusic(float value)
     {
         musicSource.volume = value;
     }
+
+    //Change volume sfx
     public void ChangeSFX(float value)
     {
         SFXSource.volume = value;

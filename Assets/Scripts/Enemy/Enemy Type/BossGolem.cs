@@ -82,6 +82,7 @@ public class BossGolem : Enemy
     //Create after fire homing missle, attach in frame HomingMissle
     public void CreateHomingMissle()
     {
+        AudioManager.instance.playSFX(AudioManager.instance.bossFireHomingMissle);
         //Create homing missle with direction
         if(!isFacingLeft)
         {
@@ -99,13 +100,20 @@ public class BossGolem : Enemy
     //Create laser prefab when play laser beam animation
     public void CreateLaserBeam(Quaternion rotation)
     {
+        AudioManager.instance.playSFX(AudioManager.instance.bossFireLaser);
         Instantiate(laserBeamPrefab, laserBeamFirePos.transform.position, rotation);
     }
 
     //Attach to end frame of animation attack
     public void DamageMelleToPlayer()
     {
+        AudioManager.instance.playSFX(AudioManager.instance.bossAttack);
         playerHeal.takeDamage(5);
+    }
+
+    public void ActiveCanvasWin()
+    {
+        MiscManager.instance.Win();
     }
 
 }

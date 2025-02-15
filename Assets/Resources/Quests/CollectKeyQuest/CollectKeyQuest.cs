@@ -27,7 +27,8 @@ public class CollectKeyQuest : QuestStep
     {
         for(int i = 0; i < listKey.Length; i++)
         {
-            if(listKey[i].name == key.name)
+            string keyName = key.name.Replace("(Clone)", "").Trim();
+            if (listKey[i].name == keyName)
             {
                 keyCollected += 1;
                 UpdateState();

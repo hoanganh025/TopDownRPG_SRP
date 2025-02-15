@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Sword
   health: 0
-  attack: 5
+  attack: 3
   defense: 0
-  agility: 1
+  agility: 0
   mana: 0
   AP: 0
   itemType: 8
