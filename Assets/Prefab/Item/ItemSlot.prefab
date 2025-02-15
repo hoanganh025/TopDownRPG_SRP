@@ -234,7 +234,7 @@ MonoBehaviour:
   emptySprite: {fileID: -1151607207, guid: 26f06195e2a137d40a4eb35f052ed176, type: 3}
   selectedShader: {fileID: 3691855189478129105}
   thisItemSelected: 0
-  maxNumberOfItem: 2
+  maxNumberOfItem: 9
   toolTip: {fileID: 0}
 --- !u!1 &3691855189478129105
 GameObject:

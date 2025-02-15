@@ -19775,7 +19775,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 679376844217805259, guid: ae02e56b4b6aaaf42b2f74fba2b55f33, type: 3}
       propertyPath: maxHealth
-      value: 5
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4013257225171682901, guid: ae02e56b4b6aaaf42b2f74fba2b55f33, type: 3}
       propertyPath: m_AnchorMax.x

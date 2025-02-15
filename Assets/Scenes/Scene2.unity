@@ -444,6 +444,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1495110439468740419, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1903105522232658056, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -472,6 +476,14 @@ PrefabInstance:
       propertyPath: bossRoomDoorCollider
       value: 
       objectReference: {fileID: 2071318533}
+    - target: {fileID: 4508113771975166556, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801579896585193133, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8031600525510824820, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.79
@@ -510,6 +522,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031600525510824820, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8217116049731228681, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8589549317608652871, guid: 6d0047e4d67c44340bbae74bf5750930, type: 3}

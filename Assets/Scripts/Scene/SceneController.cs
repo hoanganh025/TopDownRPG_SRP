@@ -36,8 +36,9 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         //If the first time play game, player init center of scene 1
-        if (firstTimeLoadScene == false && firstPosPlayerInit)
+        if (PlayerController.instance && firstTimeLoadScene == false && firstPosPlayerInit)
         {
+            Debug.Log(firstPosPlayerInit);
             PlayerController.instance.transform.position = firstPosPlayerInit.transform.position;
             firstTimeLoadScene = true;
         }
@@ -70,6 +71,7 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadSceneRoutine(string _sceneName) //Load next scene with scene name
     {
+        Debug.Log("Load scene 1");
         animatorScene.SetTrigger("End");
         //Wait animation end scene finished
         yield return new WaitForSeconds(2f);
@@ -80,6 +82,9 @@ public class SceneController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        entrance = GameObject.Find("AreaEntrance").GetComponent<Entrance>();
+        if(scene.name != "Scene0")
+        {
+            entrance = GameObject.Find("AreaEntrance").GetComponent<Entrance>();
+        }
     }
 }

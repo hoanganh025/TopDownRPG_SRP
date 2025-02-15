@@ -54,7 +54,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.instance.inputController.Gameplay.AudioSetting.WasPressedThisFrame() && PlayerController.instance != null)
+        if (PlayerController.instance && PlayerController.instance.inputController.Gameplay.AudioSetting.WasPressedThisFrame())
         {
             AudioSetting();
         }

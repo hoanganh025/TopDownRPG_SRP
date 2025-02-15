@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     public GameObject tutorialCanvas;
-    private bool isTutorialActive = false;
+    public bool isTutorialActive = false;
 
     private void Start()
     {
@@ -23,13 +23,11 @@ public class MainMenu : MonoBehaviour
         if (!isTutorialActive)
         {
             tutorialCanvas.SetActive(true);
-            Time.timeScale = 0;
             isTutorialActive = true;
         }
         else
         {
             tutorialCanvas.SetActive(false);
-            Time.timeScale = 1;
             isTutorialActive = false;
         }
     }

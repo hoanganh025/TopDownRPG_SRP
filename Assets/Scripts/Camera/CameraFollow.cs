@@ -14,7 +14,6 @@ public class CameraFollow : MonoBehaviour
         if (CinemachineVirtualCamera == null)
         {
             cameraFollow = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
